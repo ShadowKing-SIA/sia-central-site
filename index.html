@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b0d">
+  <meta name="description" content="A fictional Shadow Intelligence Agency website concept for the ShadowSMP universe.">
+  <title>SIA Central | Shadow Intelligence Agency</title>
+  <style>
+    :root {
+      --bg: #07090b;
+      --panel: rgba(15, 21, 25, .88);
+      --panel2: rgba(18, 27, 31, .72);
+      --line: rgba(163, 163, 10, .42);
+      --acid: #A3A30A;
+      --cyan: #72f5ed;
+      --violet: #9d8bff;
+      --text: #edf3f4;
+      --muted: #9eafb3;
+      --danger: #ffbd69;
+      --radius: 18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(ellipse at 15% 10%, rgba(114,245,237,.10), transparent 32rem),
+        radial-gradient(ellipse at 86% 22%, rgba(157,139,255,.12), transparent 28rem),
+        radial-gradient(ellipse at 50% 100%, rgba(163,163,10,.07), transparent 34rem),
+        var(--bg);
+      min-height: 100vh;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background-image: linear-gradient(rgba(114,245,237,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(114,245,237,.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+    a { color: inherit; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    .topline { height: 3px; background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), var(--acid), transparent); }
+    header { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(18px); background: rgba(7,9,11,.82); border-bottom: 1px solid rgba(114,245,237,.15); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:76px; }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; min-width:0; }
+    .sigil { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; border:1px solid var(--cyan); border-radius:12px; color:var(--cyan); font-weight:900; letter-spacing:-2px; box-shadow:0 0 22px rgba(114,245,237,.13), inset 0 0 14px rgba(114,245,237,.08); }
+    .brand strong { display:block; letter-spacing:.16em; font-size:.95rem; }
+    .brand small { color:var(--muted); letter-spacing:.12em; font-size:.65rem; }
+    .navlinks { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:6px; }
+    .navlinks button { color:var(--muted); border:1px solid transparent; background:transparent; border-radius:10px; padding:10px 12px; }
+    .navlinks button:hover, .navlinks button.active { color:var(--text); border-color:rgba(114,245,237,.28); background:rgba(114,245,237,.06); }
+    .navlinks .portal-btn { color:#080b0d; background:var(--cyan); font-weight:800; }
+    main { padding:38px 0 76px; }
+    .view { display:none; animation:fade .28s ease; }
+    .view.active { display:block; }
+    @keyframes fade { from { opacity:.25; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+    .eyebrow { color:var(--cyan); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; font-weight:800; }
+    .hero { display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:32px; min-height:470px; }
+    h1 { font-size:clamp(2.6rem, 6vw, 5.2rem); line-height:.98; letter-spacing:-.055em; margin:18px 0; max-width:760px; }
+    h1 span { color:var(--cyan); text-shadow:0 0 28px rgba(114,245,237,.22); }
+    h2 { font-size:clamp(1.7rem, 4vw, 2.7rem); letter-spacing:-.035em; margin:10px 0 14px; }
+    h3 { margin:0 0 8px; font-size:1.05rem; }
+    p { color:#b6c4c7; line-height:1.7; }
+    .hero p { max-width:650px; font-size:1.06rem; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+    .btn { border:1px solid var(--cyan); color:#071011; background:var(--cyan); border-radius:12px; padding:12px 17px; font-weight:850; }
+    .btn.secondary { color:var(--text); background:rgba(12,18,21,.65); border-color:rgba(114,245,237,.34); }
+    .btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+    .hero-art { min-height:340px; display:grid; place-items:center; position:relative; overflow:hidden; border:1px solid rgba(114,245,237,.24); border-radius:26px; background:linear-gradient(145deg,rgba(114,245,237,.07),rgba(157,139,255,.08) 55%,rgba(163,163,10,.04)); box-shadow:0 0 65px rgba(114,245,237,.055), inset 0 0 40px rgba(157,139,255,.04); }
+    .orbit { width:225px; height:225px; border:1px solid rgba(114,245,237,.58); border-radius:50%; position:absolute; transform:rotate(-28deg) scaleX(.74); box-shadow:0 0 30px rgba(114,245,237,.10); }
+    .orbit.two { width:280px; height:280px; border-color:rgba(157,139,255,.52); transform:rotate(52deg) scaleX(.58); }
+    .orbit.three { width:170px; height:170px; border-color:rgba(163,163,10,.7); transform:rotate(8deg) scaleX(.96); }
+    .core { width:112px; height:112px; border:1px solid var(--cyan); display:grid; place-items:center; border-radius:28px; color:var(--cyan); font-weight:950; font-size:2rem; letter-spacing:-.1em; background:rgba(7,14,16,.85); box-shadow:0 0 45px rgba(114,245,237,.22), inset 0 0 28px rgba(114,245,237,.08); transform:rotate(45deg); }
+    .core span { transform:rotate(-45deg); }
+    .art-label { position:absolute; bottom:18px; left:18px; right:18px; display:flex; justify-content:space-between; color:var(--muted); font-size:.7rem; letter-spacing:.12em; gap:8px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
+    .grid.two { grid-template-columns:repeat(2,1fr); }
+    .card { background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid rgba(114,245,237,.17); border-radius:var(--radius); padding:21px; box-shadow:inset 0 1px rgba(255,255,255,.025); }
+    .card .icon { color:var(--cyan); font-size:1.25rem; margin-bottom:14px; }
+    .tag { display:inline-block; border:1px solid rgba(114,245,237,.28); border-radius:999px; padding:5px 9px; color:var(--cyan); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:32px 0 12px; }
+    .section-head p { margin:0; max-width:580px; }
+    .notice { border-left:3px solid var(--acid); padding:14px 16px; background:rgba(163,163,10,.07); color:#d9d9a2; border-radius:0 12px 12px 0; line-height:1.6; margin:18px 0; }
+    .form { display:grid; gap:13px; max-width:680px; }
+    label { display:grid; gap:7px; color:#d9e3e5; font-size:.9rem; }
+    input, textarea, select { width:100%; color:var(--text); background:#080d10; border:1px solid rgba(114,245,237,.24); border-radius:10px; padding:12px 13px; outline:none; }
+    input:focus, textarea:focus, select:focus { border-color:var(--cyan); box-shadow:0 0 0 3px rgba(114,245,237,.08); }
+    textarea { min-height:100px; resize:vertical; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .status { display:none; border:1px solid rgba(114,245,237,.3); border-radius:12px; padding:13px; margin-top:14px; color:var(--cyan); background:rgba(114,245,237,.06); }
+    .status.show { display:block; }
+    .portal-layout { display:grid; grid-template-columns:220px 1fr; gap:16px; margin-top:22px; }
+    .side-nav { display:grid; gap:6px; align-content:start; }
+    .side-nav button { text-align:left; color:var(--muted); background:transparent; border:1px solid transparent; border-radius:10px; padding:11px; }
+    .side-nav button.active, .side-nav button:hover { color:var(--text); border-color:rgba(157,139,255,.35); background:rgba(157,139,255,.07); }
+    .portal-panel { min-height:270px; }
+    .portal-content { display:none; }
+    .portal-content.active { display:block; }
+    .mission { display:flex; justify-content:space-between; gap:14px; align-items:start; border-bottom:1px solid rgba(255,255,255,.08); padding:14px 0; }
+    .mission:last-child { border:0; }
+    .mission small { display:block; color:var(--muted); margin-top:5px; }
+    .pill { color:var(--danger); border:1px solid rgba(255,189,105,.32); border-radius:999px; padding:5px 8px; white-space:nowrap; font-size:.68rem; }
+    .directory { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .agent { border:1px solid rgba(157,139,255,.22); border-radius:12px; padding:13px; background:rgba(157,139,255,.035); }
+    .agent strong { display:block; margin-bottom:5px; }
+    footer { border-top:1px solid rgba(114,245,237,.13); padding:24px 0 34px; color:var(--muted); font-size:.78rem; }
+    .footer-inner { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+    .tiny { font-size:.78rem; color:var(--muted); }
+    .hidden { display:none !important; }
+    @media (max-width:800px) {
+      .hero { grid-template-columns:1fr; padding-top:18px; }
+      .hero-art { min-height:280px; }
+      .grid { grid-template-columns:1fr 1fr; }
+      .nav { align-items:flex-start; padding:13px 0; flex-direction:column; }
+      .navlinks { justify-content:flex-start; }
+      .portal-layout { grid-template-columns:1fr; }
+      .side-nav { grid-template-columns:repeat(3,1fr); }
+      .directory { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:520px) {
+      .grid, .grid.two, .form-row { grid-template-columns:1fr; }
+      .side-nav { grid-template-columns:1fr 1fr; }
+      .directory { grid-template-columns:1fr; }
+      .art-label { font-size:.58rem; }
+      .shell { width:min(100% - 22px, 1160px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#home" aria-label="SIA Central home" data-view="home">
+        <div class="sigil">SIA</div>
+        <div><strong>SHADOW INTELLIGENCE AGENCY</strong><small>SIA-01 · CENTRAL RECEPTION</small></div>
+      </a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <button class="active" data-view="home">Home</button>
+        <button data-view="about">About</button>
+        <button data-view="recruitment">Recruitment</button>
+        <button data-view="contact">Contact</button>
+        <button class="portal-btn" data-view="portal">Agent Portal ↗</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="view active" id="home">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">Fictional universe · ShadowSMP</div>
+          <h1>Beyond the known.<br><span>Within our watch.</span></h1>
+          <p>The Shadow Intelligence Agency studies unusual events, protects sensitive information, and coordinates responses across the ShadowSMP universe. This is a concept website for the story world, not a real government or intelligence service.</p>
+          <div class="actions">
+            <button class="btn" data-view="recruitment">Explore Recruitment</button>
+            <button class="btn secondary" data-view="about">Discover SIA</button>
+          </div>
+          <p class="tiny">PROPOSED PUBLIC-FACING COPY · SIA CANON CHANGES REQUIRE CREATOR APPROVAL</p>
+        </div>
+        <div class="hero-art" aria-label="Abstract holographic SIA emblem">
+          <div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div>
+          <div class="core"><span>SIA</span></div>
+          <div class="art-label"><span>NEXUS SIGNAL: STABLE</span><span>AUTHORIZATION: PUBLIC</span></div>
+        </div>
+      </div>
+      <div class="section-head"><div><div class="eyebrow">Agency overview</div><h2>Quiet work. Clear purpose.</h2></div><p>Three guiding principles for this proposed public website.</p></div>
+      <div class="grid">
+        <article class="card"><div class="icon">◈</div><h3>Protect information</h3><p>Handle records carefully, respect access boundaries, and preserve a reliable history of decisions.</p></article>
+        <article class="card"><div class="icon">⌁</div><h3>Investigate responsibly</h3><p>Verify evidence, distinguish confirmed facts from theories, and avoid rushing to conclusions.</p></article>
+        <article class="card"><div class="icon">⟡</div><h3>Work as one agency</h3><p>Coordinate across departments while keeping authority, rank, and clearance clearly distinct.</p></article>
+      </div>
+      <div class="notice"><strong>Canon note:</strong> The visual design and public copy are proposed. They do not establish new character powers, relationships, ranks, or story outcomes.</div>
+    </section>
+
+    <section class="view" id="about">
+      <div class="eyebrow">About the agency</div><h1 style="font-size:clamp(2.4rem,5vw,4rem)">A wider view of<br><span>the Shadow Nexus.</span></h1>
+      <p style="max-width:780px">The SIA is part of the fictional ShadowSMP setting. Its public-facing mission is to investigate unusual activity, safeguard information, and coordinate teams when events cross ordinary boundaries.</p>
+      <div class="section-head"><div><div class="eyebrow">Proposed departments</div><h2>Specialists, connected.</h2></div></div>
+      <div class="grid">
+        <article class="card"><span class="tag">EXCOM · Proposed</span><h3 style="margin-top:14px">Executive Command</h3><p>Strategic coordination and high-level authorization, always subject to The Creator’s supreme authority.</p></article>
+        <article class="card"><span class="tag">OPS · Proposed</span><h3 style="margin-top:14px">Operations</h3><p>Coordinates approved missions, field teams, and operational planning.</p></article>
+        <article class="card"><span class="tag">IAD · Proposed</span><h3 style="margin-top:14px">Intelligence & Analysis</h3><p>Reviews evidence, builds timelines, and separates verified information from speculation.</p></article>
+        <article class="card"><span class="tag">MCD · Proposed</span><h3 style="margin-top:14px">Multiverse Control & Data</h3><p>Studies multiversal signals, data anomalies, and unusual dimensional patterns.</p></article>
+        <article class="card"><span class="tag">DSC · Proposed</span><h3 style="margin-top:14px">Data Security & Counterintelligence</h3><p>Checks record integrity, access logs, and possible information compromise.</p></article>
+        <article class="card"><span class="tag">ANC · Proposed</span><h3 style="margin-top:14px">Anomalies & Containment</h3><p>Assesses unusual phenomena and coordinates safe isolation in the story setting.</p></article>
+        <article class="card"><span class="tag">SEC · Proposed</span><h3 style="margin-top:14px">Security & Enforcement</h3><p>Protects personnel, facilities, and restricted areas under approved procedures.</p></article>
+      </div>
+      <div class="notice">These departments are a proposed framework, not automatically established canon. Department assignments for existing characters remain unconfirmed until approved.</div>
+    </section>
+
+    <section class="view" id="recruitment">
+      <div class="eyebrow">Recruitment division · Draft REC-001</div><h1 style="font-size:clamp(2.4rem,5vw,4rem)">Earn your place.<br><span>Learn the standard.</span></h1>
+      <p style="max-width:760px">The proposed training route balances written knowledge with practical decision-making. Applications may be open or by invitation/referral, subject to command-staff review.</p>
+      <div class="grid two">
+        <article class="card"><div class="icon">01 / INTAKE</div><h3>Application & interview</h3><p>Share a callsign, interests, and availability. Reception checks whether an application is complete and arranges an interview when approved.</p></article>
+        <article class="card"><div class="icon">02 / TRAINING</div><h3>Cadet fundamentals</h3><p>Proposed modules: agency foundations, communication, information security, intelligence fundamentals, teamwork and judgment, and anomaly awareness.</p></article>
+        <article class="card"><div class="icon">03 / ASSESSMENT</div><h3>Written + practical</h3><p>The final assessment combines a knowledge test and fictional scenarios that test teamwork, judgment, and careful reporting.</p></article>
+        <article class="card"><div class="icon">04 / REVIEW</div><h3>Command decision</h3><p>Command staff decide appointments, subject to The Creator’s supreme authority. Graduation does not automatically grant elevated clearance.</p></article>
+      </div>
+      <div class="notice"><strong>Prototype form:</strong> This form does not submit or save information anywhere. Try it with fictional details only. Do not enter real passwords, private information, or sensitive records.</div>
+      <form class="form" id="applicationForm">
+        <div class="form-row">
+          <label>Preferred callsign <input name="callsign" required maxlength="30" placeholder="e.g. Night Signal"></label>
+          <label>Application route <select name="route"><option>Open application</option><option>Invitation / referral</option></select></label>
+        </div>
+        <label>Why would you like to join the fictional SIA? <textarea name="reason" required maxlength="500" placeholder="A few sentences about your character or play style"></textarea></label>
+        <button class="btn" type="submit">Preview application</button>
+      </form>
+      <div class="status" id="applicationStatus" role="status"></div>
+    </section>
+
+    <section class="view" id="contact">
+      <div class="eyebrow">Central reception</div><h1 style="font-size:clamp(2.4rem,5vw,4rem)">SIA Central.<br><span>How may we assist?</span></h1>
+      <div class="grid two">
+        <article class="card"><div class="icon">⌕</div><h3>General questions</h3><p>Use this concept page to explore the fictional agency and its proposed recruitment route.</p><span class="tag">Public information</span></article>
+        <article class="card"><div class="icon">▣</div><h3>Restricted requests</h3><p>In the story, reception records the request and routes it for review. Reception does not disclose classified details or grant access.</p><span class="tag">Authorization required</span></article>
+      </div>
+      <div class="notice">Suggested reception greeting: “Shadow Intelligence Agency, Central Reception. Good morning/afternoon. How may I assist you?” A real phone number can be added later if you decide you still want one. No number is connected to this demo.</div>
+      <p class="tiny">This page is a fictional roleplay concept. Do not use it to impersonate a real agency or collect other people's private information.</p>
+    </section>
+
+    <section class="view" id="portal">
+      <div class="eyebrow">SIA-01 · Internal interface concept</div><h1 style="font-size:clamp(2.4rem,5vw,4rem)">Agent <span>Portal.</span></h1>
+      <p>Interactive interface preview. It is not a real secure portal and does not authenticate users. All displayed records are fictional examples.</p>
+      <div class="notice"><strong>DEMO ONLY:</strong> There is no login system, server, database, or real access control in this starter site. Never put confidential information here. A publishable secure portal requires a real authentication service and server-side permissions.</div>
+      <div class="portal-layout">
+        <nav class="side-nav" aria-label="Portal demo navigation">
+          <button class="active" data-panel="missions">Mission Board</button>
+          <button data-panel="directory">Agent Directory</button>
+          <button data-panel="cases">Case Files</button>
+          <button data-panel="training">Training Center</button>
+          <button data-panel="notifications">Notifications</button>
+          <button data-panel="profile">My Profile</button>
+        </nav>
+        <div class="card portal-panel">
+          <div class="portal-content active" id="panel-missions">
+            <div class="section-head" style="margin-top:0"><div><div class="eyebrow">Fictional sample data</div><h2>Mission Board</h2></div><span class="tag">3 entries</span></div>
+            <div class="mission"><div><strong>VOIDGLASS · Signal Review</strong><small>Review unusual signal reports and mark verified evidence.</small></div><span class="pill">PROPOSED</span></div>
+            <div class="mission"><div><strong>ECLIPSE · Archive Audit</strong><small>Compare duplicate record versions and note discrepancies.</small></div><span class="pill">TRAINING</span></div>
+            <div class="mission"><div><strong>NIGHTFALL · Briefing Prep</strong><small>Prepare a summary for authorized command review.</small></div><span class="pill">DRAFT</span></div>
+          </div>
+          <div class="portal-content" id="panel-directory"><h2>Agent Directory</h2><p class="tiny">Role assignments below are examples or previously discussed possibilities, not approved new canon.</p><div class="directory"><div class="agent"><strong>The Creator</strong><span class="tiny">Supreme authority · established</span></div><div class="agent"><strong>Vinnie</strong><span class="tiny">Creator · highest agent clearance</span></div><div class="agent"><strong>Liam</strong><span class="tiny">Multiverse/Data Control focus</span></div><div class="agent"><strong>Max</strong><span class="tiny">Enforcer for ShadowSMP</span></div><div class="agent"><strong>Kai</strong><span class="tiny">Multiverse/Data Control · Clearance 7</span></div></div></div>
+          <div class="portal-content" id="panel-cases"><h2>Case Files</h2><p>Sample case labels only. No actual case content is stored.</p><div class="mission"><div><strong>CASE-001 · Record Integrity</strong><small>Training exercise: compare two fictional reports.</small></div><span class="tag">TRAINING</span></div><div class="mission"><div><strong>CASE-Ω · First Record</strong><small>Proposed mystery file. Origin and contents remain unverified.</small></div><span class="pill">UNVERIFIED</span></div></div>
+          <div class="portal-content" id="panel-training"><h2>Training Center</h2><div class="grid two"><div class="agent"><strong>Agency Foundations</strong><p class="tiny">Purpose, principles, and chain of command.</p></div><div class="agent"><strong>Information Security</strong><p class="tiny">Safe handling and access boundaries.</p></div><div class="agent"><strong>Evidence Review</strong><p class="tiny">Facts versus assumptions.</p></div><div class="agent"><strong>Practical Scenarios</strong><p class="tiny">Balanced judgment and teamwork exercises.</p></div></div></div>
+          <div class="portal-content" id="panel-notifications"><h2>Notifications</h2><div class="mission"><div><strong>Welcome to SIA-01</strong><small>This is a local interface demonstration.</small></div><span class="tag">INFO</span></div><div class="mission"><div><strong>Canon review reminder</strong><small>New lore stays proposed until The Creator approves it.</small></div><span class="tag">NOTE</span></div></div>
+          <div class="portal-content" id="panel-profile"><h2>Demo Profile</h2><p>Access status: <strong style="color:var(--cyan)">Preview mode</strong></p><p>Clearance: <strong>Not authenticated</strong></p><p class="tiny">This interface does not create an account or save profile changes.</p><button class="btn secondary" id="profileDemo">Test interface response</button><div class="status" id="profileStatus" role="status"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="shell footer-inner"><span>© SIA-01 · ShadowSMP fictional universe concept</span><span>Holographic interface · Build 0.1 · Proposed lore</span></div>
+  </footer>
+  <script>
+    const viewButtons = [...document.querySelectorAll('[data-view]')];
+    const views = [...document.querySelectorAll('.view')];
+    function showView(id) {
+      views.forEach(v => v.classList.toggle('active', v.id === id));
+      document.querySelectorAll('.navlinks [data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === id));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    viewButtons.forEach(button => button.addEventListener('click', () => showView(button.dataset.view)));
+    document.querySelectorAll('.side-nav button').forEach(button => button.addEventListener('click', () => {
+      document.querySelectorAll('.side-nav button').forEach(b => b.classList.toggle('active', b === button));
+      document.querySelectorAll('.portal-content').forEach(p => p.classList.toggle('active', p.id === 'panel-' + button.dataset.panel));
+    }));
+    document.getElementById('applicationForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const status = document.getElementById('applicationStatus');
+      status.textContent = `Preview created for callsign “${data.get('callsign')}” via ${data.get('route')}. Nothing was sent or saved.`;
+      status.classList.add('show');
+    });
+    document.getElementById('profileDemo').addEventListener('click', () => {
+      const status = document.getElementById('profileStatus');
+      status.textContent = 'Interface check complete. Demo only: no profile data was changed.';
+      status.classList.add('show');
+    });
+  </script>
+</body>
+</html>
